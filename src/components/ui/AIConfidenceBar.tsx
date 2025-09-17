@@ -16,9 +16,9 @@ const AIConfidenceBar = ({ value, size = 'md', className }: AIConfidenceBarProps
   };
 
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.8) return 'bg-gray-700'; // High confidence - dark gray
-    if (confidence >= 0.6) return 'bg-gray-500'; // Medium confidence - medium gray  
-    return 'bg-gray-300'; // Low confidence - light gray
+    if (confidence >= 0.8) return 'bg-success'; // High confidence - green
+    if (confidence >= 0.6) return 'bg-warning'; // Medium confidence - amber  
+    return 'bg-destructive'; // Low confidence - red
   };
 
   const getConfidenceLabel = (confidence: number) => {

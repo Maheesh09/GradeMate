@@ -309,7 +309,7 @@ const Upload = () => {
               <Button 
                 onClick={nextStep}
                 disabled={!canProceed()}
-                className="btn-secondary"
+                className="bg-gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
               >
                 Save & Continue
                 <Icon.ChevronRight className="ml-2 h-4 w-4" />
@@ -318,7 +318,7 @@ const Upload = () => {
               <Button 
                 onClick={handleStartGrading}
                 disabled={!canProceed() || isProcessing}
-                className="btn-hero"
+                className="bg-gradient-primary text-white px-8 py-4 text-lg font-semibold rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105"
               >
                 {isProcessing ? (
                   <>

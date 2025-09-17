@@ -121,7 +121,7 @@ const Jobs = () => {
               <h1 className="text-2xl font-bold">AutoGrader</h1>
             </Link>
             <nav className="flex items-center space-x-6">
-              <Link to="/upload" className="btn-hero">
+              <Link to="/upload" className="bg-gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                 <Icon.Upload className="mr-2 h-4 w-4" />
                 New Job
               </Link>
@@ -190,13 +190,13 @@ const Jobs = () => {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
                 <Card className="p-6 hover:shadow-md transition-shadow">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-lg font-semibold mb-1">{job.name}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Created {formatTimeAgo(job.createdAt)}
-                      </p>
-                    </div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-1 text-primary">{job.name}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          Created {formatTimeAgo(job.createdAt)}
+                        </p>
+                      </div>
                     {getStatusBadge(job.status)}
                   </div>
 

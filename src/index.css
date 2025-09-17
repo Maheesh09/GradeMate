@@ -2,66 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* AutoGrader UI Design System - Strict Grayscale Theme */
+/* AutoGrader UI Design System - Modern Colorful Theme */
 
 @layer base {
   :root {
-    /* Primary grayscale palette */
-    --background: 0 0% 100%;           /* #ffffff - page background */
-    --foreground: 0 0% 0%;             /* #000000 - primary text */
+    /* Modern color palette */
+    --background: 240 100% 99%;           /* #fefbff - soft white */
+    --foreground: 231 48% 12%;            /* #0f1419 - deep blue-gray */
     
-    /* Gray scale tokens */
-    --gray-50: 0 0% 97%;               /* #f6f6f6 */
-    --gray-100: 0 0% 96%;              /* #f6f6f6 */
-    --gray-200: 0 0% 90%;              /* #e6e6e6 */
-    --gray-300: 0 0% 83%;              /* #d4d4d4 */
-    --gray-500: 0 0% 61%;              /* #9b9b9b */
-    --gray-700: 0 0% 29%;              /* #4b4b4b */
-    --gray-900: 0 0% 0%;               /* #000000 */
-
-    /* Component tokens */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    --card-border: 0 0% 90%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-
-    --primary: 0 0% 0%;                /* Black primary */
-    --primary-foreground: 0 0% 100%;   /* White on black */
-
-    --secondary: 0 0% 96%;             /* Light gray */
-    --secondary-foreground: 0 0% 0%;   /* Black on light gray */
-
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 61%;
-
-    --accent: 0 0% 29%;                /* Dark gray accent */
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 0% 20%;           /* Dark gray for destructive */
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 90%;
-    --input: 0 0% 100%;
-    --input-border: 0 0% 83%;
-    --ring: 0 0% 0%;
-
-    --radius: 0.5rem;
-
-    /* Status indicators (grayscale patterns) */
-    --success: 0 0% 29%;               /* Dark gray for success */
-    --success-foreground: 0 0% 100%;
-    --warning: 0 0% 61%;               /* Medium gray for warning */
-    --warning-foreground: 0 0% 0%;
-    --error: 0 0% 0%;                  /* Black for error */
-    --error-foreground: 0 0% 100%;
-
-    /* Confidence levels */
-    --confidence-high: 0 0% 29%;       /* Dark gray - high confidence */
-    --confidence-medium: 0 0% 61%;     /* Medium gray - medium confidence */
-    --confidence-low: 0 0% 83%;        /* Light gray - low confidence */
-
+    /* Primary brand colors - Deep Blue */
+    --primary: 221 83% 53%;               /* #2563eb - vibrant blue */
+    --primary-foreground: 0 0% 100%;      /* #ffffff - white */
+    --primary-hover: 221 83% 45%;         /* #1d4ed8 - darker blue */
+    
+    /* Secondary colors - Light Blue */
+    --secondary: 214 95% 93%;             /* #dbeafe - light blue */
+    --secondary-foreground: 221 83% 53%;  /* #2563eb - blue text */
+    
+    /* Accent colors - Emerald Green */
+    --accent: 158 64% 52%;                /* #10b981 - emerald */
+    --accent-foreground: 0 0% 100%;       /* #ffffff - white */
+    
+    /* Success - Green */
+    --success: 142 71% 45%;               /* #059669 - green */
+    --success-foreground: 0 0% 100%;      /* #ffffff - white */
+    
+    /* Warning - Amber */
+    --warning: 45 93% 47%;                /* #f59e0b - amber */
+    --warning-foreground: 0 0% 100%;      /* #ffffff - white */
+    
+    /* Error/Destructive - Red */
+    --destructive: 0 72% 51%;             /* #dc2626 - red */
+    --destructive-foreground: 0 0% 100%;  /* #ffffff - white */
+    
+    /* Neutral grays */
+    --muted: 210 40% 96%;                 /* #f8fafc - very light gray */
+    --muted-foreground: 215 16% 47%;      /* #64748b - slate gray */
+    
+    /* Card and surface colors */
+    --card: 0 0% 100%;                    /* #ffffff - white */
+    --card-foreground: 231 48% 12%;       /* #0f1419 - dark text */
+    --card-border: 214 32% 91%;           /* #e2e8f0 - light border */
+    
+    /* Input and form colors */
+    --input: 0 0% 100%;                   /* #ffffff - white background */
+    --input-border: 214 32% 91%;          /* #e2e8f0 - light border */
+    --border: 214 32% 91%;                /* #e2e8f0 - general border */
+    
+    /* Focus and interaction */
+    --ring: 221 83% 53%;                  /* #2563eb - blue focus ring */
+    
+    /* Popover colors */
+    --popover: 0 0% 100%;                 /* #ffffff - white */
+    --popover-foreground: 231 48% 12%;    /* #0f1419 - dark text */
+    
+    /* Confidence level colors */
+    --confidence-high: 142 71% 45%;       /* #059669 - green for high confidence */
+    --confidence-medium: 45 93% 47%;      /* #f59e0b - amber for medium confidence */
+    --confidence-low: 0 72% 51%;          /* #dc2626 - red for low confidence */
+    
+    /* Gradient definitions */
+    --gradient-primary: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(262, 83%, 58%));
+    --gradient-secondary: linear-gradient(135deg, hsl(214, 95%, 93%), hsl(221, 83%, 53%));
+    --gradient-hero: linear-gradient(135deg, hsl(221, 83%, 53%) 0%, hsl(262, 83%, 58%) 50%, hsl(158, 64%, 52%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-colored: 0 10px 25px -5px hsl(221, 83%, 53%, 0.3);
+    
+    /* Border radius */
+    --radius: 0.75rem;
+    
     /* Animation timings */
     --transition-fast: 150ms;
     --transition-normal: 300ms;
@@ -128,8 +141,9 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, hsl(240, 100%, 99%) 0%, hsl(214, 95%, 98%) 100%);
   }
 
   /* Focus rings for accessibility */
@@ -152,45 +166,63 @@
 
   /* Confidence indicator patterns */
   .confidence-high {
-    @apply bg-gray-700 text-white;
+    @apply bg-success text-success-foreground shadow-sm;
   }
 
   .confidence-medium {
-    @apply bg-gray-500 text-white border-2 border-dashed border-gray-700;
+    @apply bg-warning text-warning-foreground shadow-sm;
   }
 
   .confidence-low {
-    @apply bg-gray-300 text-gray-900 border-2 border-gray-700;
+    @apply bg-destructive text-destructive-foreground shadow-sm;
   }
 }
 
 @layer components {
   /* Custom button variants */
   .btn-hero {
-    @apply bg-primary text-primary-foreground px-8 py-4 text-lg font-semibold rounded-lg;
-    @apply hover:bg-gray-700 transition-colors duration-200;
+    @apply bg-primary text-primary-foreground px-8 py-4 text-lg font-semibold rounded-xl;
+    @apply hover:bg-primary-hover transition-all duration-300 transform hover:scale-105;
+    @apply shadow-lg hover:shadow-colored;
     @apply focus-visible;
+    background: var(--gradient-primary);
   }
 
   .btn-secondary {
     @apply bg-secondary text-secondary-foreground px-6 py-3 font-medium rounded-lg;
-    @apply border border-gray-300 hover:bg-gray-200 transition-colors duration-200;
+    @apply border border-primary/20 hover:bg-primary/5 hover:border-primary/30;
+    @apply transition-all duration-200 hover:shadow-md;
     @apply focus-visible;
   }
 
   .btn-tertiary {
-    @apply text-gray-700 px-4 py-2 font-medium rounded;
-    @apply hover:bg-gray-100 transition-colors duration-200;
+    @apply text-primary px-4 py-2 font-medium rounded-lg;
+    @apply hover:bg-primary/5 transition-all duration-200;
     @apply focus-visible;
   }
 
   /* Card styles */
   .card {
-    @apply bg-card border border-card-border rounded-lg shadow-sm;
+    @apply bg-card border border-card-border rounded-xl shadow-sm;
+    @apply hover:shadow-md transition-shadow duration-200;
   }
 
   .card-elevated {
-    @apply bg-card border border-card-border rounded-lg shadow-md;
+    @apply bg-card border border-card-border rounded-xl shadow-lg;
+    @apply hover:shadow-xl transition-shadow duration-300;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-secondary {
+    background: var(--gradient-secondary);
   }
 }
 

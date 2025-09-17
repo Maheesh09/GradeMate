@@ -54,7 +54,7 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 gradient-hero text-white">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -64,20 +64,20 @@ const Index = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Instant AI grading — no sign-in required
             </h1>
-            <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
               Upload scanned exam sheets, review low-confidence answers, and export results — all in minutes. 
               Built for instructors who need quick, reliable grading assistance.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/upload">
-                <Button className="btn-hero">
+                <Button className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   <Icon.Upload className="mr-2 h-5 w-5" />
                   Try it — Upload Papers
                 </Button>
               </Link>
               <Link to="/playground">
-                <Button variant="outline" className="btn-secondary">
+                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 px-6 py-3 rounded-xl">
                   <Icon.Play className="mr-2 h-5 w-5" />
                   View Demo
                 </Button>
@@ -110,11 +110,11 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
               >
-                <Card className="p-6 text-center hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 mx-auto mb-4 bg-primary rounded-lg flex items-center justify-center">
-                    <feature.icon className="h-6 w-6 text-primary-foreground" />
+                <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                  <div className="w-12 h-12 mx-auto mb-4 bg-gradient-primary rounded-xl flex items-center justify-center shadow-lg">
+                    <feature.icon className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-primary">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </Card>
               </motion.div>
@@ -136,7 +136,7 @@ const Index = () => {
               No account required. Upload your exam papers and see AI grading in action.
             </p>
             <Link to="/upload">
-              <Button className="btn-hero">
+              <Button className="bg-gradient-primary text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 Start Grading Now
                 <Icon.ChevronRight className="ml-2 h-5 w-5" />
               </Button>
