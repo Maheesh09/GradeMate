@@ -90,7 +90,7 @@ const Playground = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <Icon.Document className="h-8 w-8" />
+              <img src="/logo.png" alt="AutoGrader Logo" className="h-16 w-16" />
               <div>
                 <h1 className="text-2xl font-bold">AutoGrader Playground</h1>
                 <p className="text-sm text-muted-foreground">Component demos and testing scenarios</p>

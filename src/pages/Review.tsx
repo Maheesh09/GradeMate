@@ -171,7 +171,7 @@ const Review = () => {
           <div className="flex items-center justify-between">
             <Link to="/jobs" className="flex items-center space-x-2">
               <Icon.ChevronLeft className="h-5 w-5" />
-              <Icon.Document className="h-8 w-8" />
+              <img src="/logo.png" alt="AutoGrader Logo" className="h-16 w-16" />
               <div>
                 <h1 className="text-xl font-bold">{job.name}</h1>
                 <p className="text-sm text-muted-foreground">Review Workspace</p>
