@@ -117,7 +117,9 @@ const Jobs = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <img src="/logo.png" alt="AutoGrader Logo" className="h-16 w-16" />
+              <div className="bg-white rounded-full shadow-sm">
+                <img src="/logo.png" alt="AutoGrader Logo" className="h-16 w-16" />
+              </div>
               <h1 className="text-2xl font-bold">AutoGrader</h1>
             </Link>
             <nav className="flex items-center space-x-6">

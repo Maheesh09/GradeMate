@@ -36,7 +36,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="bg-white rounded-full p-2 shadow-sm">
+              <div className="bg-white rounded-full shadow-sm">
                 <img src="/logo.png" alt="AutoGrader Logo" className="h-12 w-12" />
               </div>
               <h1 className="text-2xl font-bold">AutoGrader</h1>
