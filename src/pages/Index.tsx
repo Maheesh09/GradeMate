@@ -62,7 +62,7 @@ const Index = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Instant AI grading — no sign-in required
+              Grading made simple
             </h1>
             <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
               Upload scanned exam sheets, review low-confidence answers, and export results — all in minutes. 
@@ -77,7 +77,7 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/playground">
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 px-6 py-3 rounded-xl">
+                <Button variant="outline" className="border-white/50 text-white hover:bg-white/20 hover:border-white/70 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-white/10 backdrop-blur-sm">
                   <Icon.Play className="mr-2 h-5 w-5" />
                   View Demo
                 </Button>
