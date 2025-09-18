@@ -77,6 +77,7 @@ export interface UploadedFile {
   pageCount: number;
   mappings: FieldMapping[];
   status: 'pending' | 'mapped' | 'error';
+  type: 'exam_paper' | 'marking_scheme';
 }
 
 export interface JobProgress {

@@ -12,6 +12,8 @@ interface DropzoneProps {
   onRemoveFile: (fileId: string) => void;
   maxFiles?: number;
   accept?: string[];
+  title?: string;
+  description?: string;
 }
 
 const Dropzone = ({ 
@@ -19,7 +21,9 @@ const Dropzone = ({
   uploadedFiles, 
   onRemoveFile, 
   maxFiles = 50,
-  accept = ['.pdf', '.jpg', '.jpeg', '.png'] 
+  accept = ['.pdf', '.jpg', '.jpeg', '.png'],
+  title = "Drag & drop files here or click to browse",
+  description = "Upload exam papers"
 }: DropzoneProps) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -110,10 +114,10 @@ const Dropzone = ({
           
           <div>
             <h3 className="text-lg font-semibold mb-2">
-              Drag & drop files here or click to browse
+              {title}
             </h3>
             <p className="text-muted-foreground mb-4">
-              Upload exam papers ({accept.join(', ')}) • Max {maxFiles} files • Max 20MB per file
+              {description} ({accept.join(', ')}) • Max {maxFiles} files • Max 20MB per file
             </p>
           </div>
 
@@ -169,6 +173,15 @@ const Dropzone = ({
                         <div className="font-medium text-sm">{uploadedFile.file.name}</div>
                         <div className="text-xs text-muted-foreground">
                           {formatFileSize(uploadedFile.file.size)} • {uploadedFile.pageCount} pages
+                          {uploadedFile.type && (
+                            <span className={`ml-2 px-2 py-0.5 rounded text-xs font-medium ${
+                              uploadedFile.type === 'marking_scheme' 
+                                ? 'bg-blue-100 text-blue-800' 
+                                : 'bg-green-100 text-green-800'
+                            }`}>
+                              {uploadedFile.type === 'marking_scheme' ? 'Marking Scheme' : 'Exam Paper'}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>

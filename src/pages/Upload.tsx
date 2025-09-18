@@ -33,13 +33,14 @@ const Upload = () => {
   const currentStepIndex = steps.findIndex(step => step.id === currentStep);
   const progress = ((currentStepIndex + 1) / steps.length) * 100;
 
-  const handleFilesUploaded = (files: File[]) => {
+  const handleFilesUploaded = (files: File[], type: 'exam_paper' | 'marking_scheme') => {
     const newFiles: UploadedFile[] = files.map((file, index) => ({
       id: `file-${Date.now()}-${index}`,
       file,
       pageCount: Math.floor(Math.random() * 3) + 1, // Mock page count
       mappings: [],
       status: 'pending',
+      type,
     }));
     
     setUploadedFiles(prev => [...prev, ...newFiles]);
@@ -111,7 +112,9 @@ const Upload = () => {
   const canProceed = () => {
     switch (currentStep) {
       case 'files':
-        return uploadedFiles.length > 0;
+        const hasMarkingScheme = uploadedFiles.some(f => f.type === 'marking_scheme');
+        const hasExamPapers = uploadedFiles.some(f => f.type === 'exam_paper');
+        return hasMarkingScheme && hasExamPapers;
       case 'mapping':
         return uploadedFiles.every(f => f.mappings.length > 0);
       case 'rubric':
@@ -194,17 +197,119 @@ const Upload = () => {
           transition={{ duration: 0.3 }}
         >
           {currentStep === 'files' && (
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Upload Exam Papers</h2>
-              <Card className="p-6">
-                <Dropzone 
-                  onFiles={handleFilesUploaded}
-                  uploadedFiles={uploadedFiles}
-                  onRemoveFile={(fileId) => 
-                    setUploadedFiles(prev => prev.filter(f => f.id !== fileId))
-                  }
-                />
-              </Card>
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold mb-6">Upload Files</h2>
+                <p className="text-muted-foreground mb-8">
+                  Upload both the marking scheme and exam papers to get started with AI grading.
+                </p>
+              </div>
+
+              {/* Upload Sections - Side by Side on Desktop */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Marking Scheme Upload */}
+                <div>
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Icon.Document className="mr-2 h-5 w-5" />
+                    Marking Scheme
+                  </h3>
+                  <Card className="p-6">
+                    <Dropzone 
+                      onFiles={(files) => handleFilesUploaded(files, 'marking_scheme')}
+                      uploadedFiles={uploadedFiles.filter(f => f.type === 'marking_scheme')}
+                      onRemoveFile={(fileId) => 
+                        setUploadedFiles(prev => prev.filter(f => f.id !== fileId))
+                      }
+                      maxFiles={1}
+                      accept={['.pdf', '.jpg', '.jpeg', '.png']}
+                      title="Upload marking scheme or answer key"
+                      description="Upload marking scheme"
+                    />
+                  </Card>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Upload the answer key or marking scheme for this exam. This helps the AI understand the correct answers and scoring criteria.
+                  </p>
+                </div>
+
+                {/* Exam Papers Upload */}
+                <div>
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Icon.Upload className="mr-2 h-5 w-5" />
+                    Exam Papers
+                  </h3>
+                  <Card className="p-6">
+                    <Dropzone 
+                      onFiles={(files) => handleFilesUploaded(files, 'exam_paper')}
+                      uploadedFiles={uploadedFiles.filter(f => f.type === 'exam_paper')}
+                      onRemoveFile={(fileId) => 
+                        setUploadedFiles(prev => prev.filter(f => f.id !== fileId))
+                      }
+                      maxFiles={50}
+                      accept={['.pdf', '.jpg', '.jpeg', '.png']}
+                      title="Upload student exam papers"
+                      description="Upload exam papers"
+                    />
+                  </Card>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Upload scanned exam papers from students. You can upload multiple files at once.
+                  </p>
+                </div>
+              </div>
+
+              {/* Upload Summary */}
+              {uploadedFiles.length > 0 && (
+                <Card className="p-6 bg-blue-50 border-blue-200">
+                  <h4 className="font-semibold mb-3 text-blue-900">Upload Summary</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-blue-700">Marking Scheme:</span>
+                      <span className="font-medium text-blue-900">
+                        {uploadedFiles.filter(f => f.type === 'marking_scheme').length} file(s)
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-blue-700">Exam Papers:</span>
+                      <span className="font-medium text-blue-900">
+                        {uploadedFiles.filter(f => f.type === 'exam_paper').length} file(s)
+                      </span>
+                    </div>
+                  </div>
+                </Card>
+              )}
+
+              {/* Requirements Check */}
+              {uploadedFiles.length > 0 && (
+                <Card className="p-6">
+                  <h4 className="font-semibold mb-3">Requirements Check</h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      {uploadedFiles.some(f => f.type === 'marking_scheme') ? (
+                        <Icon.Check className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <Icon.X className="h-4 w-4 text-red-600" />
+                      )}
+                      <span className={uploadedFiles.some(f => f.type === 'marking_scheme') ? 'text-green-700' : 'text-red-700'}>
+                        Marking scheme uploaded
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      {uploadedFiles.some(f => f.type === 'exam_paper') ? (
+                        <Icon.Check className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <Icon.X className="h-4 w-4 text-red-600" />
+                      )}
+                      <span className={uploadedFiles.some(f => f.type === 'exam_paper') ? 'text-green-700' : 'text-red-700'}>
+                        Exam papers uploaded
+                      </span>
+                    </div>
+                  </div>
+                  {!canProceed() && (
+                    <p className="text-sm text-muted-foreground mt-3">
+                      Please upload both a marking scheme and exam papers to continue.
+                    </p>
+                  )}
+                </Card>
+              )}
             </div>
           )}
 
@@ -256,10 +361,21 @@ const Upload = () => {
                       <div key={file.id} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                         <div className="flex items-center space-x-3">
                           <Icon.Document className="h-5 w-5 text-gray-500" />
-                          <span className="font-medium">{file.file.name}</span>
-                          <span className="text-sm text-muted-foreground">
-                            {file.pageCount} pages, {file.mappings.length} fields mapped
-                          </span>
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <span className="font-medium">{file.file.name}</span>
+                              <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                                file.type === 'marking_scheme' 
+                                  ? 'bg-blue-100 text-blue-800' 
+                                  : 'bg-green-100 text-green-800'
+                              }`}>
+                                {file.type === 'marking_scheme' ? 'Marking Scheme' : 'Exam Paper'}
+                              </span>
+                            </div>
+                            <span className="text-sm text-muted-foreground">
+                              {file.pageCount} pages, {file.mappings.length} fields mapped
+                            </span>
+                          </div>
                         </div>
                         <div className={`
                           px-2 py-1 rounded text-xs font-medium
