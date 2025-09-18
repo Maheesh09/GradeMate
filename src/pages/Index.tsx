@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const Index = () => {
   const features = [
@@ -39,15 +40,16 @@ const Index = () => {
               <h1 className="text-2xl font-bold">AutoGrader</h1>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
-              <Link to="/jobs" className="text-gray-700 hover:text-foreground transition-colors">
+              <Link to="/jobs" className="text-muted-foreground hover:text-foreground transition-colors">
                 Jobs
               </Link>
-              <Link to="/reports" className="text-gray-700 hover:text-foreground transition-colors">
+              <Link to="/reports" className="text-muted-foreground hover:text-foreground transition-colors">
                 Reports
               </Link>
-              <Link to="/playground" className="text-gray-700 hover:text-foreground transition-colors">
+              <Link to="/playground" className="text-muted-foreground hover:text-foreground transition-colors">
                 Demo
               </Link>
+              <ThemeToggle />
             </nav>
           </div>
         </div>
