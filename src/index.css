@@ -97,69 +97,69 @@
   }
 
   .dark {
-    /* Dark theme - Beautiful navy & purple palette */
-    --background: 222 47% 5%;              /* #0a0e1a - deep navy */
-    --foreground: 210 40% 98%;             /* #fafbfc - soft white */
+    /* Dark theme - Improved contrast and visibility */
+    --background: 220 13% 8%;              /* #13151a - dark background */
+    --foreground: 210 40% 98%;             /* #fafbfc - bright white text */
     
-    /* Primary brand colors - Bright Blue */
+    /* Primary brand colors - Bright Blue with good contrast */
     --primary: 217 91% 60%;                /* #3b82f6 - bright blue */
-    --primary-foreground: 222 47% 5%;      /* #0a0e1a - dark navy */
-    --primary-hover: 217 91% 55%;          /* #2563eb - darker blue */
+    --primary-foreground: 220 13% 8%;      /* #13151a - dark text on primary */
+    --primary-hover: 217 91% 55%;          /* #2563eb - darker blue on hover */
     
-    /* Secondary colors - Dark slate with blue tint */
-    --secondary: 215 28% 17%;              /* #1e293b - dark slate */
-    --secondary-foreground: 210 40% 98%;   /* #fafbfc - light text */
+    /* Secondary colors - Light background with dark text */
+    --secondary: 215 25% 20%;              /* #2a3441 - medium dark */
+    --secondary-foreground: 210 40% 98%;   /* #fafbfc - bright white text */
     
-    /* Accent colors - Purple */
-    --accent: 262 83% 58%;                 /* #8b5cf6 - purple */
-    --accent-foreground: 210 40% 98%;      /* #fafbfc - white text */
+    /* Accent colors - Purple with good contrast */
+    --accent: 262 83% 65%;                 /* #a855f7 - brighter purple */
+    --accent-foreground: 220 13% 8%;       /* #13151a - dark text */
     
-    /* Success - Emerald */
-    --success: 158 64% 52%;                /* #10b981 - emerald */
-    --success-foreground: 210 40% 98%;     /* #fafbfc - white text */
+    /* Success - Bright emerald for visibility */
+    --success: 158 64% 55%;                /* #34d399 - brighter emerald */
+    --success-foreground: 220 13% 8%;      /* #13151a - dark text */
     
-    /* Warning - Amber */
-    --warning: 45 93% 58%;                 /* #fbbf24 - amber */
-    --warning-foreground: 222 47% 5%;      /* #0a0e1a - dark text */
+    /* Warning - Bright amber for visibility */
+    --warning: 45 93% 65%;                 /* #fcd34d - brighter amber */
+    --warning-foreground: 220 13% 8%;      /* #13151a - dark text */
     
-    /* Error/Destructive - Red */
-    --destructive: 0 72% 51%;              /* #dc2626 - red */
+    /* Error/Destructive - Bright red for visibility */
+    --destructive: 0 84% 60%;              /* #ef4444 - brighter red */
     --destructive-foreground: 210 40% 98%; /* #fafbfc - white text */
     
-    /* Neutral grays */
-    --muted: 215 28% 17%;                  /* #1e293b - dark slate */
-    --muted-foreground: 215 20% 65%;       /* #94a3b8 - light gray */
+    /* Neutral grays - Better contrast */
+    --muted: 215 25% 18%;                  /* #252a34 - lighter muted background */
+    --muted-foreground: 215 20% 75%;       /* #c1c7d1 - much lighter gray text */
     
-    /* Card and surface colors */
-    --card: 222 47% 7%;                    /* #0f172a - slightly lighter navy */
-    --card-foreground: 210 40% 98%;        /* #fafbfc - light text */
-    --card-border: 215 28% 25%;            /* #334155 - slate border */
+    /* Card and surface colors - Better contrast */
+    --card: 220 13% 10%;                   /* #171920 - slightly lighter than background */
+    --card-foreground: 210 40% 98%;        /* #fafbfc - bright white text */
+    --card-border: 215 25% 25%;            /* #34404f - visible border */
     
-    /* Input and form colors */
-    --input: 215 28% 17%;                  /* #1e293b - dark input */
-    --input-border: 215 28% 25%;           /* #334155 - slate border */
-    --border: 215 28% 25%;                 /* #334155 - general border */
+    /* Input and form colors - Better visibility */
+    --input: 215 25% 15%;                  /* #1f2937 - dark input background */
+    --input-border: 215 25% 30%;           /* #475569 - visible border */
+    --border: 215 25% 25%;                 /* #34404f - general border */
     
     /* Focus and interaction */
-    --ring: 217 91% 60%;                   /* #3b82f6 - blue focus ring */
+    --ring: 217 91% 60%;                   /* #3b82f6 - bright blue focus ring */
     
-    /* Popover colors */
-    --popover: 222 47% 7%;                 /* #0f172a - dark navy */
-    --popover-foreground: 210 40% 98%;     /* #fafbfc - light text */
+    /* Popover colors - Good contrast */
+    --popover: 220 13% 10%;                /* #171920 - dark popover background */
+    --popover-foreground: 210 40% 98%;     /* #fafbfc - bright white text */
     
-    /* Confidence level colors (adjusted for dark theme) */
-    --confidence-high: 158 64% 52%;        /* #10b981 - emerald */
-    --confidence-medium: 45 93% 58%;       /* #fbbf24 - amber */
-    --confidence-low: 0 72% 51%;           /* #dc2626 - red */
+    /* Confidence level colors - High contrast for dark theme */
+    --confidence-high: 158 64% 55%;        /* #34d399 - bright emerald */
+    --confidence-medium: 45 93% 65%;       /* #fcd34d - bright amber */
+    --confidence-low: 0 84% 60%;           /* #ef4444 - bright red */
     
-    /* Sidebar colors */
-    --sidebar-background: 222 47% 5%;      /* #0a0e1a - deep navy */
-    --sidebar-foreground: 210 40% 98%;     /* #fafbfc - light text */
+    /* Sidebar colors - Consistent with theme */
+    --sidebar-background: 220 13% 8%;      /* #13151a - same as background */
+    --sidebar-foreground: 210 40% 98%;     /* #fafbfc - bright white text */
     --sidebar-primary: 217 91% 60%;        /* #3b82f6 - bright blue */
-    --sidebar-primary-foreground: 222 47% 5%; /* #0a0e1a - dark navy */
-    --sidebar-accent: 215 28% 17%;         /* #1e293b - dark slate */
-    --sidebar-accent-foreground: 210 40% 98%; /* #fafbfc - light text */
-    --sidebar-border: 215 28% 25%;         /* #334155 - slate border */
+    --sidebar-primary-foreground: 220 13% 8%; /* #13151a - dark text */
+    --sidebar-accent: 215 25% 18%;         /* #252a34 - muted accent */
+    --sidebar-accent-foreground: 210 40% 98%; /* #fafbfc - bright white text */
+    --sidebar-border: 215 25% 25%;         /* #34404f - visible border */
     --sidebar-ring: 217 91% 60%;           /* #3b82f6 - blue ring */
   }
 }
