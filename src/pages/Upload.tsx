@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/card';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import Dropzone from '@/components/upload/Dropzone';
 import { UploadedFile } from '@/types';
-import { mockApi } from '@/lib/mockApi';
+import { api } from '@/lib/api';
 import { sampleRubric } from '@/mocks/fixtures';
 import { useToast } from '@/hooks/use-toast';
 
@@ -16,8 +16,9 @@ const Upload = () => {
   const { toast } = useToast();
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [extractedData, setExtractedData] = useState<any[]>([]);
 
-  const handleFilesUploaded = (files: File[], type: 'exam_paper' | 'marking_scheme') => {
+  const handleFilesUploaded = async (files: File[], type: 'exam_paper' | 'marking_scheme') => {
     const newFiles: UploadedFile[] = files.map((file, index) => ({
       id: `file-${Date.now()}-${index}`,
       file,
@@ -28,6 +29,51 @@ const Upload = () => {
     }));
     
     setUploadedFiles(prev => [...prev, ...newFiles]);
+
+    // If it's a marking scheme (answer sheet), extract data immediately
+    if (type === 'marking_scheme') {
+      try {
+        setIsProcessing(true);
+        
+        // Process each file
+        for (const file of files) {
+          try {
+            const result = await api.uploadAnswerSheet(file);
+            setExtractedData(prev => [...prev, result]);
+            
+            // Update file status to processed
+            setUploadedFiles(prev => 
+              prev.map(f => 
+                f.file.name === file.name 
+                  ? { ...f, status: 'mapped' as const }
+                  : f
+              )
+            );
+            
+            toast({
+              title: "Answer sheet processed",
+              description: `Extracted ${Object.keys(result.parsed_questions).length} questions from ${file.name}`,
+            });
+          } catch (error) {
+            console.error('Error processing file:', error);
+            toast({
+              title: "Processing failed",
+              description: `Failed to process ${file.name}`,
+              variant: "destructive",
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error uploading files:', error);
+        toast({
+          title: "Upload failed",
+          description: "Failed to upload files",
+          variant: "destructive",
+        });
+      } finally {
+        setIsProcessing(false);
+      }
+    }
   };
 
 
@@ -44,22 +90,22 @@ const Upload = () => {
     setIsProcessing(true);
 
     try {
-      const fileIds = uploadedFiles.map(f => f.id);
-      const allMappings = uploadedFiles.flatMap(f => f.mappings);
+      // Here you would typically create a job with the extracted data
+      // For now, we'll simulate the job creation
+      const jobId = `job-${Date.now()}`;
       
-      const job = await mockApi.createJob(
-        `Grading Job - ${new Date().toLocaleDateString()}`,
-        fileIds,
-        rubric.id,
-        allMappings
-      );
-
       toast({
         title: "Grading started",
-        description: `Job ${job.id} created successfully`,
+        description: `Job ${jobId} created successfully`,
       });
 
-      navigate(`/review/${job.id}`);
+      // Navigate to review page with extracted data
+      navigate(`/review/${jobId}`, { 
+        state: { 
+          extractedData,
+          uploadedFiles: uploadedFiles.filter(f => f.type === 'marking_scheme')
+        }
+      });
     } catch (error) {
       toast({
         title: "Failed to start grading",
@@ -119,7 +165,7 @@ const Upload = () => {
                 <div>
                   <h3 className="text-xl font-semibold mb-4 flex items-center">
                     <Icon.Document className="mr-2 h-5 w-5" />
-                    Marking Scheme
+                    Marking Scheme (Answer Sheet)
                   </h3>
                   <Card className="p-6">
                     <Dropzone 
@@ -129,13 +175,13 @@ const Upload = () => {
                         setUploadedFiles(prev => prev.filter(f => f.id !== fileId))
                       }
                       maxFiles={1}
-                      accept={['.pdf', '.jpg', '.jpeg', '.png']}
-                      title="Upload marking scheme or answer key"
+                      accept={['.pdf']}
+                      title="Upload answer sheet PDF"
                       description="Upload marking scheme"
                     />
                   </Card>
                   <p className="text-sm text-muted-foreground mt-2">
-                    Upload the answer key or marking scheme for this exam. This helps the AI understand the correct answers and scoring criteria.
+                    Upload the answer key or marking scheme for this exam. The system will automatically extract questions and answers.
                   </p>
                 </div>
 
@@ -163,6 +209,29 @@ const Upload = () => {
                   </p>
                 </div>
               </div>
+
+              {/* Extracted Data Display */}
+              {extractedData.length > 0 && (
+                <Card className="p-6 bg-green-50 border-green-200">
+                  <h4 className="font-semibold mb-3 text-green-900">Extracted Answer Sheet Data</h4>
+                  <div className="space-y-4">
+                    {extractedData.map((data, index) => (
+                      <div key={index} className="bg-white p-4 rounded border">
+                        <h5 className="font-medium text-green-800 mb-2">{data.filename}</h5>
+                        <div className="text-sm text-green-700">
+                          <p><strong>Questions extracted:</strong> {Object.keys(data.parsed_questions).length}</p>
+                          <div className="mt-2">
+                            <strong>Question structure:</strong>
+                            <pre className="mt-1 text-xs bg-gray-100 p-2 rounded overflow-auto max-h-32">
+                              {JSON.stringify(data.parsed_questions, null, 2)}
+                            </pre>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              )}
 
               {/* Upload Summary */}
               {uploadedFiles.length > 0 && (
