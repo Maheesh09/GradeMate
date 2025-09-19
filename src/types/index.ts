@@ -1,4 +1,4 @@
-// Type definitions for AutoGrader UI
+// Type definitions for GradeMate UI
 
 export interface FieldMapping {
   id: string;

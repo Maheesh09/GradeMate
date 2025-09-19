@@ -1,4 +1,4 @@
-// Monochrome SVG icon components for AutoGrader UI
+// Monochrome SVG icon components for GradeMate UI
 
 interface IconProps {
   className?: string;

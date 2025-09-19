@@ -1,4 +1,4 @@
-// Mock API client for AutoGrader UI - simulates all backend interactions
+// Mock API client for GradeMate UI - simulates all backend interactions
 
 import { Job, Submission, Rubric, FieldMapping, JobProgress, AssistantSuggestion } from '@/types';
 import { mockJobs, mockSubmissions, sampleRubric, sampleMappings, sampleRationales } from '@/mocks/fixtures';

@@ -1,4 +1,4 @@
-// Mock data fixtures for AutoGrader UI
+// Mock data fixtures for GradeMate UI
 
 import { Job, Submission, Rubric, FieldMapping } from '@/types';
 

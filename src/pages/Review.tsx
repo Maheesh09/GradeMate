@@ -172,7 +172,7 @@ const Review = () => {
             <Link to="/jobs" className="flex items-center space-x-2">
               <Icon.ChevronLeft className="h-5 w-5" />
               <div className="bg-white rounded-full shadow-sm">
-                <img src="/logo.png" alt="AutoGrader Logo" className="h-16 w-16" />
+                <img src="/logo.png" alt="GradeMate Logo" className="h-16 w-16" />
               </div>
               <div>
                 <h1 className="text-xl font-bold">{job.name}</h1>

@@ -118,9 +118,9 @@ const Jobs = () => {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
               <div className="bg-white rounded-full shadow-sm">
-                <img src="/logo.png" alt="AutoGrader Logo" className="h-16 w-16" />
+                <img src="/logo.png" alt="GradeMate Logo" className="h-16 w-16" />
               </div>
-              <h1 className="text-2xl font-bold">AutoGrader</h1>
+              <h1 className="text-2xl font-bold">GradeMate</h1>
             </Link>
             <nav className="flex items-center space-x-6">
               <Link to="/upload" className="bg-gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">

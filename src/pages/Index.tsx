@@ -37,9 +37,9 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="bg-white rounded-full shadow-sm">
-                <img src="/logo.png" alt="AutoGrader Logo" className="h-12 w-12" />
+                <img src="/logo.png" alt="GradeMate Logo" className="h-12 w-12" />
               </div>
-              <h1 className="text-2xl font-bold">AutoGrader</h1>
+              <h1 className="text-2xl font-bold">GradeMate</h1>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
               <Link to="/jobs" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -152,7 +152,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-border py-8 px-4">
         <div className="container mx-auto text-center text-muted-foreground">
-          <p>&copy; 2025 AutoGrader. Built for educators, by educators.</p>
+          <p>&copy; 2025 GradeMate. Built for educators, by educators.</p>
         </div>
       </footer>
     </div>
