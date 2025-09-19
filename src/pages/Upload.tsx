@@ -59,7 +59,7 @@ const Upload = () => {
         description: `Job ${job.id} created successfully`,
       });
 
-      navigate(`/jobs`);
+      navigate(`/review/${job.id}`);
     } catch (error) {
       toast({
         title: "Failed to start grading",

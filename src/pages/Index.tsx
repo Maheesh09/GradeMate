@@ -45,15 +45,6 @@ const Index = () => {
             
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-6">
-              <Link to="/jobs" className="text-muted-foreground hover:text-foreground transition-colors">
-                Jobs
-              </Link>
-              <Link to="/reports" className="text-muted-foreground hover:text-foreground transition-colors">
-                Reports
-              </Link>
-              <Link to="/playground" className="text-muted-foreground hover:text-foreground transition-colors">
-                Demo
-              </Link>
               <ThemeToggle />
             </nav>
 
@@ -86,12 +77,6 @@ const Index = () => {
                 <Button className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   <Icon.Upload className="mr-2 h-5 w-5" />
                   Try it — Upload Papers
-                </Button>
-              </Link>
-              <Link to="/playground">
-                <Button variant="outline" className="border-white/50 text-white hover:bg-white/20 hover:border-white/70 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-white/10 backdrop-blur-sm">
-                  <Icon.Play className="mr-2 h-5 w-5" />
-                  View Demo
                 </Button>
               </Link>
             </div>

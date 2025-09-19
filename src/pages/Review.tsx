@@ -156,8 +156,8 @@ const Review = () => {
         <div className="text-center">
           <Icon.AlertTriangle className="h-16 w-16 text-gray-300 mx-auto mb-4" />
           <h3 className="text-xl font-semibold mb-2">Job not found</h3>
-          <Link to="/jobs">
-            <Button className="btn-secondary">Back to Jobs</Button>
+          <Link to="/">
+            <Button className="btn-secondary">Back to Home</Button>
           </Link>
         </div>
       </div>
@@ -170,7 +170,7 @@ const Review = () => {
       <header className="border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/jobs" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <Icon.ChevronLeft className="h-5 w-5" />
               <div className="bg-white rounded-full shadow-sm">
                 <img src="/logo.png" alt="GradeMate Logo" className="h-16 w-16" />
@@ -185,13 +185,6 @@ const Review = () => {
                 {submissions.filter(s => s.status === 'reviewed').length} of {submissions.length} reviewed
               </div>
               <div className="flex items-center space-x-2">
-                <Link to={`/reports?jobId=${jobId}`}>
-                  <Button variant="outline" className="btn-secondary">
-                    <Icon.Download className="mr-2 h-4 w-4" />
-                    <span className="hidden sm:inline">Export Results</span>
-                    <span className="sm:hidden">Export</span>
-                  </Button>
-                </Link>
                 <ThemeToggle />
               </div>
             </div>
