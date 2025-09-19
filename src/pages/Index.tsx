@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Icon } from '@/components/icons';
@@ -41,6 +42,8 @@ const Index = () => {
               </div>
               <h1 className="text-2xl font-bold">GradeMate</h1>
             </div>
+            
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-6">
               <Link to="/jobs" className="text-muted-foreground hover:text-foreground transition-colors">
                 Jobs
@@ -53,6 +56,11 @@ const Index = () => {
               </Link>
               <ThemeToggle />
             </nav>
+
+            {/* Mobile Theme Toggle */}
+            <div className="md:hidden">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>

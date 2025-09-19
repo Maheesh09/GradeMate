@@ -5,6 +5,7 @@ import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import ReviewCard from '@/components/review/ReviewCard';
 import ImageViewer from '@/components/review/ImageViewer';
 import { Job, Submission } from '@/types';
@@ -180,15 +181,19 @@ const Review = () => {
               </div>
             </Link>
             <div className="flex items-center space-x-4">
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm text-muted-foreground hidden md:block">
                 {submissions.filter(s => s.status === 'reviewed').length} of {submissions.length} reviewed
               </div>
-              <Link to={`/reports?jobId=${jobId}`}>
-                <Button variant="outline" className="btn-secondary">
-                  <Icon.Download className="mr-2 h-4 w-4" />
-                  Export Results
-                </Button>
-              </Link>
+              <div className="flex items-center space-x-2">
+                <Link to={`/reports?jobId=${jobId}`}>
+                  <Button variant="outline" className="btn-secondary">
+                    <Icon.Download className="mr-2 h-4 w-4" />
+                    <span className="hidden sm:inline">Export Results</span>
+                    <span className="sm:hidden">Export</span>
+                  </Button>
+                </Link>
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import ResultsTable from '@/components/reports/ResultsTable';
 import { Job, Submission } from '@/types';
 import { mockApi } from '@/lib/mockApi';
@@ -155,6 +156,7 @@ const Reports = () => {
                 <p className="text-sm text-muted-foreground">Analyze grading results and export data</p>
               </div>
             </Link>
+            <ThemeToggle />
           </div>
         </div>
       </header>

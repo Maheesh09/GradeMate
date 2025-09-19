@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import ReviewCard from '@/components/review/ReviewCard';
 import AIConfidenceBar from '@/components/ui/AIConfidenceBar';
 import { mockSubmissions, sampleRubric } from '@/mocks/fixtures';
@@ -98,12 +99,16 @@ const Playground = () => {
                 <p className="text-sm text-muted-foreground">Component demos and testing scenarios</p>
               </div>
             </Link>
-            <Link to="/upload">
-              <Button className="btn-hero">
-                <Icon.Upload className="mr-2 h-4 w-4" />
-                Try Live Upload
-              </Button>
-            </Link>
+            <div className="flex items-center space-x-4">
+              <Link to="/upload">
+                <Button className="btn-hero">
+                  <Icon.Upload className="mr-2 h-4 w-4" />
+                  <span className="hidden sm:inline">Try Live Upload</span>
+                  <span className="sm:hidden">Upload</span>
+                </Button>
+              </Link>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>

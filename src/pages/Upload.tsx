@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import Dropzone from '@/components/upload/Dropzone';
 import { UploadedFile } from '@/types';
 import { mockApi } from '@/lib/mockApi';
@@ -88,8 +89,9 @@ const Upload = () => {
               </div>
               <h1 className="text-2xl font-bold">GradeMate</h1>
             </Link>
-            <div className="flex items-center space-x-2">
-              <span className="text-sm text-muted-foreground">Upload Files</span>
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-muted-foreground hidden md:block">Upload Files</span>
+              <ThemeToggle />
             </div>
           </div>
         </div>

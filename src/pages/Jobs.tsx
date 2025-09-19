@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import JobList from '@/components/jobs/JobList';
 import { Job, JobProgress } from '@/types';
 import { mockApi } from '@/lib/mockApi';
@@ -122,12 +123,25 @@ const Jobs = () => {
               </div>
               <h1 className="text-2xl font-bold">GradeMate</h1>
             </Link>
-            <nav className="flex items-center space-x-6">
-              <Link to="/upload" className="bg-gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                <Icon.Upload className="mr-2 h-4 w-4" />
-                New Job
-              </Link>
-            </nav>
+            <div className="flex items-center space-x-4">
+              {/* Desktop Navigation */}
+              <nav className="hidden md:flex items-center space-x-6">
+                <Link to="/upload" className="bg-gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                  <Icon.Upload className="mr-2 h-4 w-4" />
+                  New Job
+                </Link>
+                <ThemeToggle />
+              </nav>
+
+              {/* Mobile Navigation */}
+              <div className="md:hidden flex items-center space-x-4">
+                <Link to="/upload" className="bg-gradient-primary text-white px-4 py-2 rounded-lg font-semibold text-sm">
+                  <Icon.Upload className="mr-1 h-4 w-4" />
+                  New Job
+                </Link>
+                <ThemeToggle />
+              </div>
+            </div>
           </div>
         </div>
       </header>
