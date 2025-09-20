@@ -41,36 +41,162 @@ class ApiClient {
   }
 
   // File upload and PDF extraction
-  async uploadAnswerSheet(file: File): Promise<{
+  async uploadMarkingSheet(file: File): Promise<{
     filename: string;
     extracted_text: string;
-    parsed_questions: Record<string, Record<string, string>>;
+    parsed_questions: Record<string, Record<string, any>>;
+    question_count: number;
     status: string;
+    pdf_id?: number;
   }> {
     const formData = new FormData();
     formData.append('file', file);
 
+    return this.uploadRequest('/upload/marking-sheet', formData);
+  }
+
+  async uploadAnswerSheet(
+    file: File, 
+    studentId?: number, 
+    subjectId?: number, 
+    useOcr: boolean = false
+  ): Promise<{
+    filename: string;
+    extracted_text: string;
+    parsed_questions: Record<string, Record<string, string>>;
+    question_count: number;
+    status: string;
+    pdf_id?: number;
+    student_id?: number;
+    subject_id?: number;
+  }> {
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    if (studentId !== undefined) {
+      formData.append('student_id', studentId.toString());
+    }
+    if (subjectId !== undefined) {
+      formData.append('subject_id', subjectId.toString());
+    }
+    formData.append('use_ocr', useOcr.toString());
+
     return this.uploadRequest('/upload/answer-sheet', formData);
   }
 
-  async uploadAnswerSheets(files: File[]): Promise<{
-    results: Array<{
-      filename: string;
-      extracted_text?: string;
-      parsed_questions?: Record<string, Record<string, string>>;
-      status: string;
-      error?: string;
-    }>;
-    total_files: number;
-    successful: number;
-    failed: number;
+  async gradeAnswers(markingSheetId: number, answerSheetId: number): Promise<{
+    student_id?: number;
+    total_score: number;
+    question_scores: Record<string, number>;
+    feedback: string[];
+    status: string;
   }> {
     const formData = new FormData();
-    files.forEach(file => {
-      formData.append('files', file);
-    });
+    formData.append('marking_sheet_id', markingSheetId.toString());
+    formData.append('answer_sheet_id', answerSheetId.toString());
 
-    return this.uploadRequest('/upload/answer-sheet-batch', formData);
+    return this.uploadRequest('/upload/grade-answers', formData);
+  }
+
+  // Data management endpoints
+  async getMarkingSheets(skip: number = 0, limit: number = 100): Promise<{
+    markings: Array<{
+      pdf_id: number;
+      pdf_name: string;
+      uploaded_at: string;
+      questions: Array<{
+        question_id: number;
+        main_no: number;
+        page_no?: number;
+        answers: Array<{
+          answer_id: number;
+          roman_text: string;
+          part_no: number;
+          answer_text: string;
+          marks: number;
+        }>;
+      }>;
+    }>;
+    total: number;
+  }> {
+    return this.request(`/data/marking-sheets?skip=${skip}&limit=${limit}`);
+  }
+
+  async getAnswerSheets(skip: number = 0, limit: number = 100): Promise<{
+    answersheets: Array<{
+      pdf_id: number;
+      pdf_name: string;
+      student_id?: number;
+      subject_id?: number;
+      uploaded_at: string;
+      questions: Array<{
+        question_id: number;
+        main_no: number;
+        question_text?: string;
+        answers: Array<{
+          answer_id: number;
+          roman_text: string;
+          part_no: number;
+          answer_text: string;
+        }>;
+      }>;
+    }>;
+    total: number;
+  }> {
+    return this.request(`/data/answer-sheets?skip=${skip}&limit=${limit}`);
+  }
+
+  async getMarkingSheet(pdfId: number): Promise<{
+    pdf_id: number;
+    pdf_name: string;
+    uploaded_at: string;
+    questions: Array<{
+      question_id: number;
+      main_no: number;
+      page_no?: number;
+      answers: Array<{
+        answer_id: number;
+        roman_text: string;
+        part_no: number;
+        answer_text: string;
+        marks: number;
+      }>;
+    }>;
+  }> {
+    return this.request(`/data/marking-sheets/${pdfId}`);
+  }
+
+  async getAnswerSheet(pdfId: number): Promise<{
+    pdf_id: number;
+    pdf_name: string;
+    student_id?: number;
+    subject_id?: number;
+    uploaded_at: string;
+    questions: Array<{
+      question_id: number;
+      main_no: number;
+      question_text?: string;
+      answers: Array<{
+        answer_id: number;
+        roman_text: string;
+        part_no: number;
+        answer_text: string;
+      }>;
+    }>;
+  }> {
+    return this.request(`/data/answer-sheets/${pdfId}`);
+  }
+
+  async deleteMarkingSheet(pdfId: number): Promise<{ message: string }> {
+    return this.request(`/data/marking-sheets/${pdfId}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async deleteAnswerSheet(pdfId: number): Promise<{ message: string }> {
+    return this.request(`/data/answer-sheets/${pdfId}`, {
+      method: 'DELETE',
+    });
   }
 
   // Health check
