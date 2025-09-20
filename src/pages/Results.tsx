@@ -22,33 +22,38 @@ const Results = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Fetch real data from backend
-  useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        setLoading(true);
-        const response = await api.getGradingResults();
-        
-        // Convert backend format to frontend format
-        const convertedResults = response.results.map(result => ({
-          student_id: result.student_id,
-          total_score: parseFloat(result.total_score), // Convert string to number
-          question_scores: result.question_scores,
-          feedback: result.feedback,
-          status: result.status
-        }));
-        
-        setResults(convertedResults);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching grading results:', err);
-        setError('Failed to load grading results. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchResults = async () => {
+    try {
+      setLoading(true);
+      const response = await api.getGradingResults();
+      
+      // Convert backend format to frontend format
+      const convertedResults = response.results.map(result => ({
+        student_id: result.student_id,
+        total_score: parseFloat(result.total_score), // Convert string to number
+        question_scores: result.question_scores,
+        feedback: result.feedback,
+        status: result.status
+      }));
+      
+      setResults(convertedResults);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching grading results:', err);
+      setError('Failed to load grading results. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchResults();
   }, []);
+
+  // Add refresh functionality
+  const handleRefresh = () => {
+    fetchResults();
+  };
 
   if (loading) {
     return (
@@ -90,6 +95,15 @@ const Results = () => {
             </Link>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-muted-foreground hidden md:block">Grading Results</span>
+              <Button
+                onClick={handleRefresh}
+                variant="outline"
+                size="sm"
+                className="hidden md:flex"
+              >
+                <Icon.RefreshCw className="mr-2 h-4 w-4" />
+                Refresh
+              </Button>
               <ThemeToggle />
             </div>
           </div>
@@ -131,6 +145,14 @@ const Results = () => {
 
             {/* Action Buttons */}
             <div className="flex justify-center space-x-4">
+              <Button
+                onClick={handleRefresh}
+                variant="outline"
+                className="px-6 py-3"
+              >
+                <Icon.RefreshCw className="mr-2 h-4 w-4" />
+                Refresh Results
+              </Button>
               <Link to="/upload">
                 <Button variant="outline" className="px-6 py-3">
                   <Icon.Upload className="mr-2 h-4 w-4" />

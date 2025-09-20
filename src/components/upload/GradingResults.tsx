@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Icon } from '@/components/icons';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
 
 interface GradingResult {
   student_id?: number;
@@ -176,6 +178,16 @@ const GradingResults = ({ results, onClose }: GradingResultsProps) => {
           </div>
         </Card>
       )}
+
+      {/* View All Results Button */}
+      <div className="flex justify-center pt-4">
+        <Link to="/results">
+          <Button className="bg-gradient-primary text-white px-6 py-3">
+            <Icon.Eye className="mr-2 h-4 w-4" />
+            View All Results
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -219,6 +219,13 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
       setGradingResults(results);
       setShowResults(true);
 
+      // Show success message with option to view all results
+      toast({
+        title: "Grading completed successfully!",
+        description: `Graded ${results.length} answer sheet(s). Click "View All Results" to see all grading results.`,
+        duration: 5000,
+      });
+
       if (onUploadComplete) {
         onUploadComplete(markingSheets, answerSheets);
       }
