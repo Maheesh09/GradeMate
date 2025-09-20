@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { api } from '@/lib/api';
+import GradingResults from './GradingResults';
 
 interface UploadedFile {
   id: string;
@@ -18,6 +19,14 @@ interface UploadedFile {
   studentId?: number;
   subjectId?: number;
   extractedData?: any;
+}
+
+interface GradingResult {
+  student_id?: number;
+  total_score: number;
+  question_scores: Record<string, number>;
+  feedback: string[];
+  status: string;
 }
 
 interface NewUploadFormProps {
@@ -32,6 +41,8 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
   const [studentId, setStudentId] = useState<string>('');
   const [subjectId, setSubjectId] = useState<string>('');
   const [useOcr, setUseOcr] = useState(false);
+  const [gradingResults, setGradingResults] = useState<GradingResult[]>([]);
+  const [showResults, setShowResults] = useState(false);
 
   const handleMarkingSheetUpload = async (files: File[]) => {
     if (files.length === 0) return;
@@ -204,6 +215,10 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
         }
       }
 
+      // Store grading results and show them
+      setGradingResults(results);
+      setShowResults(true);
+
       if (onUploadComplete) {
         onUploadComplete(markingSheets, answerSheets);
       }
@@ -238,6 +253,16 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
 
   return (
     <div className="space-y-8">
+      {/* Show Results if available */}
+      {showResults && gradingResults.length > 0 && (
+        <div>
+          <GradingResults 
+            results={gradingResults} 
+            onClose={() => setShowResults(false)}
+          />
+        </div>
+      )}
+
       {/* Marking Sheets Section */}
       <div>
         <h3 className="text-xl font-semibold mb-4 flex items-center">
@@ -405,7 +430,18 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
       </div>
 
       {/* Grade Button */}
-      <div className="flex justify-center">
+      <div className="flex justify-center space-x-4">
+        {gradingResults.length > 0 && !showResults && (
+          <Button
+            onClick={() => setShowResults(true)}
+            variant="outline"
+            className="px-6 py-3 text-lg font-semibold rounded-xl"
+          >
+            <Icon.Eye className="mr-2 h-4 w-4" />
+            View Results
+          </Button>
+        )}
+        
         <Button
           onClick={handleGradeAnswers}
           disabled={markingSheets.length === 0 || answerSheets.length === 0 || isUploading}

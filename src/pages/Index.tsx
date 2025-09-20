@@ -45,6 +45,9 @@ const Index = () => {
             
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-6">
+              <Link to="/results" className="text-sm font-medium hover:text-primary transition-colors">
+                Results
+              </Link>
               <ThemeToggle />
             </nav>
 

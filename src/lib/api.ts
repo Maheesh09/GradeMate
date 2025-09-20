@@ -98,6 +98,59 @@ class ApiClient {
     return this.uploadRequest('/upload/grade-answers', formData);
   }
 
+  // Grading results endpoints
+  async getGradingResults(skip: number = 0, limit: number = 100): Promise<{
+    results: Array<{
+      result_id: number;
+      marking_sheet_id: number;
+      answer_sheet_id: number;
+      student_id?: number;
+      total_score: number;
+      question_scores: Record<string, number>;
+      feedback: string[];
+      status: string;
+      created_at: string;
+    }>;
+    total: number;
+  }> {
+    return this.request(`/results/?skip=${skip}&limit=${limit}`);
+  }
+
+  async getGradingResult(resultId: number): Promise<{
+    result_id: number;
+    marking_sheet_id: number;
+    answer_sheet_id: number;
+    student_id?: number;
+    total_score: number;
+    question_scores: Record<string, number>;
+    feedback: string[];
+    status: string;
+    created_at: string;
+  }> {
+    return this.request(`/results/${resultId}`);
+  }
+
+  async getGradingResultsByStudent(studentId: number): Promise<{
+    results: Array<{
+      result_id: number;
+      marking_sheet_id: number;
+      answer_sheet_id: number;
+      student_id?: number;
+      total_score: number;
+      question_scores: Record<string, number>;
+      feedback: string[];
+      status: string;
+      created_at: string;
+    }>;
+    total: number;
+  }> {
+    return this.request(`/results/student/${studentId}`);
+  }
+
+  async deleteGradingResult(resultId: number): Promise<{ message: string }> {
+    return this.request(`/results/${resultId}`, { method: 'DELETE' });
+  }
+
   // Data management endpoints
   async getMarkingSheets(skip: number = 0, limit: number = 100): Promise<{
     markings: Array<{
