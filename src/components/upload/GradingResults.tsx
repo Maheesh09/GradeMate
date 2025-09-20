@@ -36,8 +36,11 @@ const GradingResults = ({ results, onClose }: GradingResultsProps) => {
 
   const calculateTotalPossibleScore = (results: GradingResult[]) => {
     if (results.length === 0) return 10;
-    const maxScore = Math.max(...results.map(r => Object.values(r.question_scores).reduce((sum, score) => sum + score, 0)));
-    return Math.max(maxScore, 10); // Default to 10 if no scores
+    
+    // Calculate total possible score based on the number of questions
+    // Assuming each question has a maximum of 3 marks (i, ii, iii parts)
+    const maxQuestions = Math.max(...results.map(r => Object.keys(r.question_scores).length));
+    return maxQuestions * 3; // 3 marks per question (i, ii, iii)
   };
 
   const totalPossibleScore = calculateTotalPossibleScore(results);

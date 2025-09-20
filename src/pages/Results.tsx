@@ -31,7 +31,7 @@ const Results = () => {
         // Convert backend format to frontend format
         const convertedResults = response.results.map(result => ({
           student_id: result.student_id,
-          total_score: result.total_score,
+          total_score: parseFloat(result.total_score), // Convert string to number
           question_scores: result.question_scores,
           feedback: result.feedback,
           status: result.status
