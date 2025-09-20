@@ -3,7 +3,7 @@
 import { Job, Submission, Rubric, FieldMapping, JobProgress, AssistantSuggestion } from '@/types';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
-  (import.meta.env.PROD ? 'https://grademate-backend.onrender.com' : 'http://127.0.0.1:8000');
+  (import.meta.env.PROD ? 'https://your-railway-url.railway.app' : 'http://127.0.0.1:8000');
 
 class ApiClient {
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
