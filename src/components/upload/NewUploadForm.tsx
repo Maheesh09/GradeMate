@@ -159,12 +159,14 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
 
   const handleFileSelect = (type: 'marking' | 'answersheet') => (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+    
     if (type === 'marking') {
       handleMarkingSheetUpload(files);
     } else {
       handleAnswerSheetUpload(files);
     }
-    e.target.value = ''; // Reset input
+    // Don't reset input value to allow multiple selections
   };
 
   const removeFile = (type: 'marking' | 'answersheet', fileId: string) => {
@@ -296,7 +298,17 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
 
             {markingSheets.length > 0 && (
               <div className="space-y-2">
-                <h4 className="font-medium">Uploaded Marking Sheets</h4>
+                <div className="flex justify-between items-center">
+                  <h4 className="font-medium">Uploaded Marking Sheets ({markingSheets.length})</h4>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setMarkingSheets([])}
+                    className="text-red-600 hover:text-red-700"
+                  >
+                    Clear All
+                  </Button>
+                </div>
                 {markingSheets.map((file) => (
                   <motion.div
                     key={file.id}
@@ -382,7 +394,7 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
                 Upload answer sheets
               </Label>
               <p className="text-sm text-muted-foreground mb-3">
-                Upload student answer sheets (PDF or images)
+                Upload student answer sheets (PDF or images). You can select multiple files at once by holding Ctrl/Cmd while clicking.
               </p>
               <Input
                 id="answersheet-upload"
@@ -396,7 +408,17 @@ const NewUploadForm = ({ onUploadComplete }: NewUploadFormProps) => {
 
             {answerSheets.length > 0 && (
               <div className="space-y-2">
-                <h4 className="font-medium">Uploaded Answer Sheets</h4>
+                <div className="flex justify-between items-center">
+                  <h4 className="font-medium">Uploaded Answer Sheets ({answerSheets.length})</h4>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setAnswerSheets([])}
+                    className="text-red-600 hover:text-red-700"
+                  >
+                    Clear All
+                  </Button>
+                </div>
                 {answerSheets.map((file) => (
                   <motion.div
                     key={file.id}
