@@ -43,17 +43,18 @@ class ApiClient {
 
   // File upload and PDF extraction
   async uploadMarkingSheet(file: File): Promise<{
-    filename: string;
-    extracted_text: string;
-    parsed_questions: Record<string, Record<string, any>>;
-    question_count: number;
-    status: string;
-    pdf_id?: number;
+    success: boolean;
+    message: string;
+    data: {
+      id: number;
+      filename: string;
+      status: string;
+    };
   }> {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.uploadRequest('/upload/marking-sheet', formData);
+    return this.uploadRequest('/api/marking-schemes/upload', formData);
   }
 
   async uploadAnswerSheet(
@@ -62,73 +63,77 @@ class ApiClient {
     subjectId?: number, 
     useOcr: boolean = false
   ): Promise<{
-    filename: string;
-    extracted_text: string;
-    parsed_questions: Record<string, Record<string, string>>;
-    question_count: number;
-    status: string;
-    pdf_id?: number;
-    student_id?: number;
-    subject_id?: number;
+    success: boolean;
+    message: string;
+    data: {
+      id: number;
+      filename: string;
+      status: string;
+    };
   }> {
     const formData = new FormData();
     formData.append('file', file);
-    
-    if (studentId !== undefined) {
-      formData.append('student_id', studentId.toString());
-    }
-    if (subjectId !== undefined) {
-      formData.append('subject_id', subjectId.toString());
-    }
     formData.append('use_ocr', useOcr.toString());
 
-    return this.uploadRequest('/upload/answer-sheet', formData);
+    return this.uploadRequest('/api/answer-sheets/upload', formData);
   }
 
-  async gradeAnswers(markingSheetId: number, answerSheetId: number): Promise<{
-    student_id?: number;
-    total_score: number;
-    question_scores: Record<string, number>;
-    feedback: string[];
-    status: string;
+  async gradeAnswers(markingSchemeId: number, answerSheetIds: number[]): Promise<{
+    success: boolean;
+    message: string;
+    data: {
+      marking_scheme_id: number;
+      answer_sheet_count: number;
+      status: string;
+    };
   }> {
-    const formData = new FormData();
-    formData.append('marking_sheet_id', markingSheetId.toString());
-    formData.append('answer_sheet_id', answerSheetId.toString());
-
-    return this.uploadRequest('/upload/grade-answers', formData);
+    return this.request('/api/grading/grade', {
+      method: 'POST',
+      body: JSON.stringify({
+        marking_scheme_id: markingSchemeId,
+        answer_sheet_ids: answerSheetIds
+      })
+    });
   }
 
   // Grading results endpoints
-  async getGradingResults(skip: number = 0, limit: number = 100): Promise<{
-    results: Array<{
-      result_id: number;
-      marking_sheet_id: number;
-      answer_sheet_id: number;
-      student_id?: number;
-      total_score: number;
-      question_scores: Record<string, number>;
-      feedback: string[];
-      status: string;
-      created_at: string;
-    }>;
-    total: number;
-  }> {
-    return this.request(`/results/?skip=${skip}&limit=${limit}`);
+  async getGradingResults(): Promise<Array<{
+    id: number;
+    student_id?: string;
+    total_score: number;
+    total_max_marks: number;
+    percentage: number;
+    grading_status: string;
+    created_at: string;
+  }>> {
+    return this.request('/api/grading/results');
   }
 
   async getGradingResult(resultId: number): Promise<{
-    result_id: number;
-    marking_sheet_id: number;
-    answer_sheet_id: number;
-    student_id?: number;
+    id: number;
+    student_id?: string;
     total_score: number;
-    question_scores: Record<string, number>;
-    feedback: string[];
-    status: string;
+    total_max_marks: number;
+    percentage: number;
+    grading_status: string;
+    question_scores?: Record<string, number>;
+    feedback?: string[];
+    recommendations?: string[];
+    excel_file_path?: string;
+    feedback_file_path?: string;
+    recommendations_file_path?: string;
     created_at: string;
   }> {
-    return this.request(`/results/${resultId}`);
+    return this.request(`/api/grading/results/${resultId}`);
+  }
+
+  async downloadExcelResult(resultId: number): Promise<Blob> {
+    const url = `${API_BASE_URL}/api/grading/results/${resultId}/excel`;
+    const response = await fetch(url, { mode: 'cors' });
+    if (!response.ok) {
+      throw new Error(`Download failed: ${response.status} ${response.statusText}`);
+    }
+    return response.blob();
   }
 
   async getGradingResultsByStudent(studentId: number): Promise<{
@@ -254,8 +259,80 @@ class ApiClient {
   }
 
   // Health check
-  async healthCheck(): Promise<{ status: string; service: string }> {
-    return this.request('/upload/health');
+  async healthCheck(): Promise<{ success: boolean; message: string; data: any }> {
+    return this.request('/health');
+  }
+
+  // Marking schemes
+  async getMarkingSchemes(): Promise<Array<{
+    id: number;
+    filename: string;
+    original_filename: string;
+    question_count: number;
+    total_marks: number;
+    processing_status: string;
+    created_at: string;
+  }>> {
+    return this.request('/api/marking-schemes');
+  }
+
+  async getMarkingScheme(schemeId: number): Promise<{
+    id: number;
+    filename: string;
+    original_filename: string;
+    question_count: number;
+    total_marks: number;
+    processing_status: string;
+    extracted_data?: any;
+    error_message?: string;
+    created_at: string;
+  }> {
+    return this.request(`/api/marking-schemes/${schemeId}`);
+  }
+
+  // Answer sheets
+  async getAnswerSheets(): Promise<Array<{
+    id: number;
+    filename: string;
+    original_filename: string;
+    file_format: string;
+    student_id?: string;
+    subject_id?: string;
+    processing_status: string;
+    ocr_used: boolean;
+    created_at: string;
+  }>> {
+    return this.request('/api/answer-sheets');
+  }
+
+  async getAnswerSheet(sheetId: number): Promise<{
+    id: number;
+    filename: string;
+    original_filename: string;
+    file_format: string;
+    student_id?: string;
+    subject_id?: string;
+    processing_status: string;
+    ocr_used: boolean;
+    extracted_answers?: string;
+    parsed_answers?: any;
+    error_message?: string;
+    marking_scheme_id?: number;
+    created_at: string;
+  }> {
+    return this.request(`/api/answer-sheets/${sheetId}`);
+  }
+
+  // Statistics
+  async getStatistics(): Promise<{
+    total_marking_schemes: number;
+    total_answer_sheets: number;
+    total_grading_results: number;
+    average_score?: number;
+    highest_score?: number;
+    lowest_score?: number;
+  }> {
+    return this.request('/api/statistics');
   }
 
   // Student management
@@ -380,6 +457,17 @@ class ApiClient {
     if (params.toString()) endpoint += `?${params.toString()}`;
     
     return this.request(endpoint);
+  }
+
+  // Update answer sheet with manual answers
+  async updateAnswerSheetAnswers(pdfId: number, answers: Record<string, Record<string, string>>): Promise<{
+    message: string;
+    pdf_id: number;
+  }> {
+    return this.request(`/upload/answer-sheet/${pdfId}/answers`, {
+      method: 'PUT',
+      body: JSON.stringify(answers),
+    });
   }
 }
 
