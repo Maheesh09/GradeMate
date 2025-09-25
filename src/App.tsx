@@ -9,6 +9,7 @@ import Upload from "./pages/Upload";
 import Review from "./pages/Review";
 import Results from "./pages/Results";
 import SimpleResults from "./pages/SimpleResults";
+import StudentView from "./pages/StudentView";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/review/:jobId" element={<Review />} />
             <Route path="/results" element={<Results />} />
             <Route path="/simple-results" element={<SimpleResults />} />
+            <Route path="/student" element={<StudentView />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

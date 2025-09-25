@@ -104,3 +104,23 @@ export interface AssistantSuggestion {
   content: string;
   context: AssistantContext;
 }
+
+// Student View Types
+export interface GradingResult {
+  id: number;
+  student_id: string;
+  marking_scheme_id: number | null;
+  answer_sheet_id: number;
+  total_score: number;
+  total_max_score: number;
+  percentage: number;
+  feedback: string[] | null;
+  recommendations: string[] | null;
+  created_at: string;
+  marking_scheme_name: string;
+  answer_sheet_filename: string;
+}
+
+export interface GradingResultDetail extends GradingResult {
+  detailed_results: Record<string, any> | null;
+}
