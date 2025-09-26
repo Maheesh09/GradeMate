@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { 
   BookOpen, Upload, Eye, CheckCircle, Download, 
-  Users, TrendingUp, Clock, Shield, Zap, Star,
+  Users, Clock, Shield, Zap,
   ArrowRight, ChevronRight, Play, Award, MessageSquare,
   Lightbulb, Target, BarChart3, Globe, Smartphone,
   Laptop, Tablet, Check, X, Plus, Minus
@@ -50,47 +50,10 @@ const Index = () => {
     },
   ];
 
-  const stats = [
-    { number: '10,000+', label: 'Papers Graded', icon: BookOpen },
-    { number: '500+', label: 'Instructors', icon: Users },
-    { number: '99.9%', label: 'Accuracy Rate', icon: Target },
-    { number: '2 min', label: 'Average Time', icon: Clock },
-  ];
 
-  const testimonials = [
-    {
-      name: 'Dr. Sarah Johnson',
-      role: 'Mathematics Professor',
-      content: 'GradeMate has revolutionized how I grade exams. The AI accuracy is impressive, and the time saved is incredible.',
-      rating: 5
-    },
-    {
-      name: 'Prof. Michael Chen',
-      role: 'Computer Science',
-      content: 'The detailed feedback feature helps students understand their mistakes better. Highly recommended!',
-      rating: 5
-    },
-    {
-      name: 'Dr. Emily Rodriguez',
-      role: 'Physics Department',
-      content: 'Finally, a grading system that actually works. The interface is intuitive and the results are reliable.',
-      rating: 5
-    }
-  ];
-
-  const pricingFeatures = [
-    { feature: 'Unlimited Paper Uploads', included: true },
-    { feature: 'AI-Powered Grading', included: true },
-    { feature: 'Detailed Feedback Generation', included: true },
-    { feature: 'Excel Export', included: true },
-    { feature: 'Student Portal Access', included: true },
-    { feature: 'Manual Review Tools', included: true },
-    { feature: 'Priority Support', included: false },
-    { feature: 'Custom Branding', included: false },
-  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-900">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
@@ -99,33 +62,33 @@ const Index = () => {
       </div>
 
       {/* Enhanced Header */}
-      <header className="relative z-10 border-b border-white/20 backdrop-blur-sm bg-white/80">
+      <header className="relative z-10 border-b border-white/20 dark:border-gray-700/20 backdrop-blur-sm bg-white/80 dark:bg-gray-900/80">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg">
-                <BookOpen className="h-8 w-8 text-white" />
+              <div className="p-2 dark:bg-white dark:rounded-full">
+                <img src="/logo.png" alt="GradeMate Logo" className="h-14 w-14 object-contain" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   GradeMate
                 </h1>
-                <p className="text-xs text-gray-600">AI-Powered Grading</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">AI-Powered Grading</p>
               </div>
             </div>
             
             {/* Enhanced Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/upload" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              <Link to="/upload" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 Upload Papers
               </Link>
-              <Link to="/results" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              <Link to="/results" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 View Results
               </Link>
-              <Link to="/student" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              <Link to="/student" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 Student Portal
               </Link>
-              <div className="h-6 w-px bg-gray-300"></div>
+              <div className="h-6 w-px bg-gray-300 dark:bg-gray-600"></div>
               <ThemeToggle />
             </nav>
 
@@ -147,22 +110,22 @@ const Index = () => {
             className="space-y-8"
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+            <div className="inline-flex items-center gap-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
               <Zap className="h-4 w-4 text-yellow-500" />
-              <span className="text-sm font-medium text-gray-700">AI-Powered Grading Platform</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">AI-Powered Grading Platform</span>
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-gray-100 dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent leading-tight">
               Grading Made
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
                 Effortless
               </span>
             </h1>
             
             {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Transform your grading process with AI-powered automation. Upload exam papers, 
               get instant results, and provide detailed feedback to students — all in minutes.
             </p>
@@ -177,7 +140,7 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/student">
-                <Button variant="outline" className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 px-10 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <Button variant="outline" className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500 px-10 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   <Eye className="mr-3 h-6 w-6" />
                   Student Portal
                 </Button>
@@ -185,7 +148,7 @@ const Index = () => {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap justify-center items-center gap-8 pt-12 text-gray-500">
+            <div className="flex flex-wrap justify-center items-center gap-8 pt-12 text-gray-500 dark:text-gray-400">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5" />
                 <span className="text-sm font-medium">Secure & Private</span>
@@ -212,14 +175,14 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-blue-100 text-blue-700 border-blue-200">
+            <Badge className="mb-4 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700">
               <Zap className="mr-2 h-4 w-4" />
               Powerful Features
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Our AI-powered system processes your exam papers quickly while giving you full control over the results.
             </p>
           </motion.div>
@@ -232,14 +195,14 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
               >
-                <Card className="group p-8 text-center bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                <Card className="group p-8 text-center bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                   <div className={`w-16 h-16 mx-auto mb-6 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold mb-4 text-gray-800 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
                 </Card>
               </motion.div>
             ))}
@@ -247,105 +210,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Statistics Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Trusted by Educators Worldwide
-            </h2>
-            <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-              Join thousands of educators who have transformed their grading process
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                className="text-center"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-4">
-                  <stat.icon className="h-8 w-8 text-white" />
-                </div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-blue-100 font-medium">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-center mb-16"
-          >
-            <Badge className="mb-4 bg-green-100 text-green-700 border-green-200">
-              <Star className="mr-2 h-4 w-4" />
-              Testimonials
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-              What Educators Say
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how GradeMate is transforming the grading experience for educators worldwide
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
-              >
-                <Card className="p-8 bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-6 leading-relaxed">
-                    "{testimonial.content}"
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold text-lg">
-                        {testimonial.name.split(' ').map(n => n[0]).join('')}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-800">{testimonial.name}</div>
-                      <div className="text-sm text-gray-600">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Enhanced CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -353,10 +220,10 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
               Ready to Transform Your Grading?
             </h2>
-            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
               Join thousands of educators who have revolutionized their grading process. 
               No account required — start grading in minutes.
             </p>
@@ -370,14 +237,14 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/student">
-                <Button variant="outline" className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 px-12 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <Button variant="outline" className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500 px-12 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                   <Eye className="mr-3 h-6 w-6" />
                   Student Portal
                 </Button>
               </Link>
             </div>
 
-            <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500">
+            <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500 dark:text-gray-400">
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-green-500" />
                 <span>Free to use</span>
@@ -402,8 +269,8 @@ const Index = () => {
             {/* Brand */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl">
-                  <BookOpen className="h-8 w-8 text-white" />
+                <div className="p-2 dark:bg-white dark:rounded-full">
+                  <img src="/logo.png" alt="GradeMate Logo" className="h-15 w-15 object-contain" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">GradeMate</h3>
