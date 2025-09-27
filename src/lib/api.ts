@@ -203,6 +203,55 @@ class ApiClient {
     const response = await this.request<GradingResultDetail>(`/api/student/${studentId}/results/${resultId}`);
     return response;
   }
+
+  // Teacher Portal Methods
+  async getTeacherDashboardStats(): Promise<{
+    total_students: number;
+    total_exams: number;
+    total_marking_schemes: number;
+    average_class_score?: number;
+    highest_class_score?: number;
+    lowest_class_score?: number;
+    students_above_80: number;
+    students_above_60: number;
+    students_below_40: number;
+  }> {
+    return this.request('/api/teacher/dashboard/stats');
+  }
+
+  async getAllStudentsSummary(): Promise<Array<{
+    student_id: string;
+    total_exams: number;
+    average_score: number;
+    highest_score: number;
+    lowest_score: number;
+    latest_exam_date?: string;
+    latest_exam_name?: string;
+  }>> {
+    return this.request('/api/teacher/students');
+  }
+
+  async getTeacherStudentResults(studentId: string): Promise<Array<{
+    id: number;
+    student_id: string;
+    marking_scheme_name: string;
+    total_score: number;
+    total_max_score: number;
+    percentage: number;
+    created_at: string;
+    feedback?: string[];
+    recommendations?: string[];
+  }>> {
+    return this.request(`/api/teacher/students/${studentId}/results`);
+  }
+
+  async exportAllStudentResults(): Promise<Blob> {
+    const response = await fetch(`${API_BASE_URL}/api/teacher/export/all-results`);
+    if (!response.ok) {
+      throw new Error(`Export failed: ${response.status} ${response.statusText}`);
+    }
+    return response.blob();
+  }
 }
 
 // Export singleton instance

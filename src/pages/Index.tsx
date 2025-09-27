@@ -236,12 +236,20 @@ const Index = () => {
                   <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
               </Link>
-              <Link to="/student">
-                <Button variant="outline" className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500 px-12 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  <Eye className="mr-3 h-6 w-6" />
-                  Student Portal
-                </Button>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/student">
+                  <Button variant="outline" className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Eye className="mr-3 h-6 w-6" />
+                    Student Portal
+                  </Button>
+                </Link>
+                <Link to="/teacher">
+                  <Button variant="outline" className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Users className="mr-3 h-6 w-6" />
+                    Teacher Portal
+                  </Button>
+                </Link>
+              </div>
             </div>
 
             <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500 dark:text-gray-400">
@@ -295,6 +303,9 @@ const Index = () => {
                 </Link>
                 <Link to="/student" className="block text-gray-400 hover:text-white transition-colors">
                   Student Portal
+                </Link>
+                <Link to="/teacher" className="block text-gray-400 hover:text-white transition-colors">
+                  Teacher Portal
                 </Link>
               </div>
             </div>
