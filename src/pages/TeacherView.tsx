@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Download, Users, BookOpen, TrendingUp, TrendingDown, Award, AlertTriangle, CheckCircle, BarChart3, FileSpreadsheet } from 'lucide-react';
 import { api } from '@/lib/api';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { formatDate } from '@/lib/dateUtils';
 
 interface DashboardStats {
   total_students: number;
@@ -405,7 +406,7 @@ const TeacherView: React.FC = () => {
                             </span>
                           </TableCell>
                           <TableCell>
-                            {new Date(result.created_at).toLocaleDateString()}
+                            {formatDate(result.created_at, { timeZone: 'Asia/Colombo' })}
                           </TableCell>
                           <TableCell>
                             <Badge className={getPerformanceBadge(result.percentage)}>

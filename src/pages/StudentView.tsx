@@ -17,6 +17,7 @@ import {
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { api } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
+import { formatDate, formatTime } from '@/lib/dateUtils';
 
 interface GradingResult {
   id: number;
@@ -454,10 +455,11 @@ const StudentView: React.FC = () => {
                         </div>
                         <div>
                           <div className="font-medium">Exam Date</div>
-                          <div>{new Date(result.created_at).toLocaleDateString('en-US', { 
+                          <div>{formatDate(result.created_at, { 
                             year: 'numeric', 
                             month: 'long', 
-                            day: 'numeric' 
+                            day: 'numeric',
+                            timeZone: 'Asia/Colombo'
                           })}</div>
                         </div>
                       </div>
@@ -468,9 +470,10 @@ const StudentView: React.FC = () => {
                         </div>
                         <div>
                           <div className="font-medium">Graded</div>
-                          <div>{new Date(result.created_at).toLocaleTimeString('en-US', { 
+                          <div>{formatTime(result.created_at, { 
                             hour: '2-digit', 
-                            minute: '2-digit' 
+                            minute: '2-digit',
+                            timeZone: 'Asia/Colombo'
                           })}</div>
                         </div>
                       </div>
@@ -601,7 +604,7 @@ const StudentView: React.FC = () => {
                     <Calendar className="h-6 w-6 text-white" />
                   </div>
                   <div className="text-lg font-bold text-orange-600 dark:text-orange-400">
-                    {new Date(selectedResult.created_at).toLocaleDateString()}
+                    {formatDate(selectedResult.created_at, { timeZone: 'Asia/Colombo' })}
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">Exam Date</p>
                 </CardContent>
